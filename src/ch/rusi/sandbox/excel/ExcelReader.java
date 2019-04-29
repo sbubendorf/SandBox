@@ -11,6 +11,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -91,7 +92,7 @@ public class ExcelReader {
 	private void addHistory() {
 		int rowHist = 0;
 		for ( Row row : sheet ) {
-			if ( row.getCell(0).getCellType() == Cell.CELL_TYPE_STRING && row.getCell(0).getStringCellValue().equals("Access History")) {
+			if ( row.getCell(0).getCellType().equals(CellType.STRING) && row.getCell(0).getStringCellValue().equals("Access History")) {
 				rowHist = row.getRowNum()+1;	// Number of the new history row
 			}
 		}
@@ -129,18 +130,14 @@ public class ExcelReader {
 	
 	private String getCellContent(Cell cell) {
 		String value = null;
-		switch(cell.getCellType()) {
-			case Cell.CELL_TYPE_BOOLEAN:
-				value = Boolean.toString(cell.getBooleanCellValue());
-				break;
-			case Cell.CELL_TYPE_NUMERIC:
-				value = String.valueOf(cell.getNumericCellValue());
-				break;
-			case Cell.CELL_TYPE_STRING:
-				value = cell.getStringCellValue();
-				break;
-			default:
-				value = null;
+		if (CellType.BOOLEAN.equals(cell.getCellType())) {
+			value = Boolean.toString(cell.getBooleanCellValue());
+		} else if (CellType.NUMERIC.equals(cell.getCellType())) {
+			value = String.valueOf(cell.getNumericCellValue());
+		} else if (CellType.STRING.equals(cell.getCellType())) {
+			value = cell.getStringCellValue();
+		} else {
+			value = null;
 		}
 		return value;
 	}
