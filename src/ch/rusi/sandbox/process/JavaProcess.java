@@ -18,6 +18,9 @@ import java.util.List;
  * Sample call:
  * 
  * 		JavaProcess.exec(MyProcess.class, List.of("-Xmx200m"), List.of("argument"));
+ * 
+ * See also https://dzone.com/articles/running-a-java-class-as-a-subprocess?edition=486301&utm_source=Zone%20Newsletter&utm_medium=email&utm_campaign=java%202019-06-04
+ * 
  */
 
 public class JavaProcess {
