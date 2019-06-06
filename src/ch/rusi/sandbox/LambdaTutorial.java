@@ -15,7 +15,6 @@ public class LambdaTutorial {
 		try {
 			list = getRandoms(1000);
 		} catch (InvalidAttributeValueException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return;
 		}

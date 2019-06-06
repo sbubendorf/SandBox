@@ -18,7 +18,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 public class ExcelReader {
-	
+
 	private File file;
 	private FileInputStream fs;
 	private Iterator<Row> rowIterator;
@@ -49,7 +49,7 @@ public class ExcelReader {
 			System.out.println("The file '" + fileName + "' you are trying to read does not exist!");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error while reading from Excel file '" + fileName + "'!");
 			e.printStackTrace();
 		}
 	}
@@ -62,7 +62,7 @@ public class ExcelReader {
 	        return "";
 	    }
 	}
-	
+
 	@SuppressWarnings("unused")
 	private void readCells() {
 		System.out.println("Showing conetent of Excel file '" + file.getName() + "':");
@@ -76,7 +76,7 @@ public class ExcelReader {
 			}
 		}
 	}
-	
+
 	public void readEmployees() {
 		int rowNum = 3;
 		while ( true ) {
@@ -88,7 +88,7 @@ public class ExcelReader {
 			rowNum += 1;
 		}
 	}
-	
+
 	private void addHistory() {
 		int rowHist = 0;
 		for ( Row row : sheet ) {
@@ -113,21 +113,21 @@ public class ExcelReader {
 			saveChanges();
 		}
 	}
-	
+
 	private void saveChanges() {
 		try {
 			FileOutputStream out = new FileOutputStream(file);
 			wb.write(out);
 			out.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+            System.out.println("File '" + file + "' not found!");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+            System.out.println("Error while writing to file '" + file + "'!");
 			e.printStackTrace();
 		}
 	}
-	
+
 	private String getCellContent(Cell cell) {
 		String value = null;
 		if (CellType.BOOLEAN.equals(cell.getCellType())) {
