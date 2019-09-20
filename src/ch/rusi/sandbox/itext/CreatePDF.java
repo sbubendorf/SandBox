@@ -7,10 +7,17 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 
 public class CreatePDF {
+	
+	/*
+	 * iText Tutorial:
+	 * 
+	 *	http://www.tutorialspoint.com/itext/index.htm
+	 * 
+	 */
 
 	public static void main(String[] args) {
 		
-		String destination = "sample.pdf";
+		String destination = "output/sample.pdf";
 		
 		try {
 			
