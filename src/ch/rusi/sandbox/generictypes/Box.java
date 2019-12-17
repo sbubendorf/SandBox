@@ -22,11 +22,11 @@ public class Box<T> {
 		this.value = value;
 	}
 	
-	public void set (T value) {
+	public void setBoxContent (T value) {
 		this.value = value;
 	}
 	
-	public T get() {
+	public T getBoxContent() {
 		return this.value;
 	}
 
