@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public class H2UpdateExample {
 
-    private static final String UPDATE_USERS_SQL = "update users set name = ? where id = ?;";
+    private static final String UPDATE_USERS_SQL = "update users set last_name = ? where id = ?;";
 
     public static void main(String[] argv) throws SQLException {
         H2UpdateExample updateStatementExample = new H2UpdateExample();
