@@ -1,14 +1,13 @@
 package ch.rusi.sandbox.json;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Iterator;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class JsonValidator {
 
@@ -19,7 +18,8 @@ public class JsonValidator {
         try {
 
             // read the json file
-            FileReader reader = new FileReader(ClassLoader.getSystemResource(filePath).getFile());
+            File file = new File(filePath);
+            FileReader reader = new FileReader(file);
 
             JSONParser jsonParser = new JSONParser();
             JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
@@ -39,11 +39,10 @@ public class JsonValidator {
             for (int i = 0; i < lang.size(); i++) {
                 System.out.println("The " + i + " element of the array: " + lang.get(i));
             }
-            Iterator i = lang.iterator();
 
             // take each value from the json array separately
-            while (i.hasNext()) {
-                JSONObject innerObj = (JSONObject) i.next();
+            for (Object o : lang) {
+                JSONObject innerObj = (JSONObject) o;
                 System.out.println("language " + innerObj.get("lang") +
                         " with level " + innerObj.get("knowledge"));
             }
@@ -51,8 +50,10 @@ public class JsonValidator {
             JSONObject structure = (JSONObject) jsonObject.get("job");
             System.out.println("Into job structure, name: " + structure.get("name"));
 
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (IOException fileException) {
+            System.out.println("Error while accessing JSON file: " + fileException.getMessage());
+        } catch (ParseException parseException) {
+            System.out.println("Error while parsing JSON file: " + parseException.toString());
         }
     }
 }
