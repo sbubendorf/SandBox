@@ -15,6 +15,8 @@ public class H2JdbcUtils {
     private static String jdbcURL = "jdbc:h2:./data/test";
     private static String jdbcUsername = "sa";
     private static String jdbcPassword = "";
+
+    private static H2JdbcUtils instance = null;
     
     public static void main(String[] args) {
     	Connection connection = getConnection();
@@ -26,6 +28,13 @@ public class H2JdbcUtils {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+    }
+
+    public static H2JdbcUtils getInstance() {
+        if (instance == null) {
+            instance = new H2JdbcUtils();
+        }
+        return instance;
     }
 
     public static Connection getConnection() {
@@ -122,6 +131,11 @@ public class H2JdbcUtils {
 		} catch (SQLException e) {
 			printSQLException(e);
 		}
+    }
+
+    public static void printConnectionInfo(Connection conn) throws SQLException {
+        System.out.println("URL : " + conn.getMetaData().getURL());
+        System.out.println("User : " + conn.getMetaData().getUserName());
     }
     
 }

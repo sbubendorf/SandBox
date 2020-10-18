@@ -11,11 +11,10 @@ import java.sql.Statement;
  */
 public class H2CreateExample {
 
-	private static final String dropTableSQL =
-			"drop table users;";
-	
-	private static final String createTableSQL = 
-    		"create table users "
+    private static final String tableName = "users";
+
+	private static final String createTableSQL =
+    		"create table if not exists " + tableName + "\r\n"
     		+ "(\r\n"
     		+ "  id  			int(3) primary key,	\r\n"
     		+ "  last_name 		varchar(100),		\r\n"
@@ -26,21 +25,29 @@ public class H2CreateExample {
     		+ "  city 			varchar(100)		\r\n"
     		+ ");";
 
-    public static void main(String[] argv) throws SQLException {
+    public static void main(String[] argv) {
         H2CreateExample createTableExample = new H2CreateExample();
         createTableExample.createTable();
     }
 
-    public void createTable() throws SQLException {
+    public void createTable() {
 
-        System.out.println(createTableSQL);
-        // Step 1: Establishing a Connection
-        try (Connection connection = H2JdbcUtils.getConnection();
+        Connection connection = null;
+        Statement statement = null;
+
+        try {
+            // Step 1: Establishing a Connection
+            connection = H2JdbcUtils.getConnection();
             // Step 2:Create a statement using connection object
-            Statement statement = connection.createStatement();) {
+            statement = connection.createStatement();
 
-            // Step 3: Drop existing table
-            statement.execute(dropTableSQL);
+            try {
+                // Step 3: Drop existing table
+                statement.execute("drop table " + tableName);
+                System.out.println("Existing table " + tableName + " dropped!");
+            } catch (Exception e) {
+                System.out.println("Table " + tableName + " does not exists!");
+            }
 
             // Step 4: Execute the query or update query
             statement.execute(createTableSQL);
@@ -48,6 +55,17 @@ public class H2CreateExample {
         } catch (SQLException e) {
             // print SQL exception information
             H2JdbcUtils.printSQLException(e);
+        } finally {
+            try {
+                if(statement != null) {
+                    statement.close();
+                }
+                if(connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException sqlException) {
+                sqlException.printStackTrace();
+            }
         }
     }
 }
