@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Clock {
 
-    private static final String clockControlFileFormat = "<([0-9]{12,12})>";
+    private static final String clockControlFileFormat = "<([0-9]{12,20})>";
 
     private Long clock;
 
@@ -17,12 +17,10 @@ public class Clock {
             // Given clock string matches the pattern
             String stringClock = matcher.group(1);
             clock = Long.parseLong(stringClock);
+            System.out.println("Clock is " + clock);
         } else {
             System.out.println("The given clock '" + controlFileClock + "' does not match the required pattern '" + clockControlFileFormat + "'!");
         }
-
-        System.out.println("Clock is " + clock);
-
     }
 
     public Clock(Long numClock) {
@@ -30,7 +28,13 @@ public class Clock {
     }
 
     public static void main(String[] args) {
-        Clock clock = new Clock("<00001x345678>");
+        Clock clockNumeric = new Clock(1234L);
+        System.out.println("Formatted clock for control file: " + clockNumeric.getControlFileClock());
+        Clock clock = new Clock("<000012345678>");
 
+    }
+
+    public String getControlFileClock() {
+        return "<" + String.format("%012d", clock) + ">";
     }
 }
