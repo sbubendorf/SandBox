@@ -2,7 +2,7 @@ package ch.rusi.sandbox.generictypes;
 
 public interface IPair<K, V> {
 	
-	public K getKey();
-	public V getValue();
+	K getKey();
+	V getValue();
 
 }

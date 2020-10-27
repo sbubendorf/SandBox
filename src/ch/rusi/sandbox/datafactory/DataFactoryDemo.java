@@ -24,9 +24,9 @@ public class DataFactoryDemo {
 			System.out.println("-----------------------");
 		}
 		
-		String text = new String();
+		StringBuilder text = new StringBuilder();
 		for ( int i = 0 ; i < 50 ; i ++ ) {
-			text = text + df.getRandomWord() + " ";
+			text.append(df.getRandomWord()).append(" ");
 		}
 		System.out.println(text);
 		

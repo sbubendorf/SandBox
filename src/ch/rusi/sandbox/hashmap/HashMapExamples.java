@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class HashMapExamples {
 
-	private static Map<String, Double> productPrice = new HashMap<>();
+	private static final Map<String, Double> productPrice = new HashMap<>();
 
 	public static void main(String[] args) {
 		
@@ -29,7 +29,7 @@ public class HashMapExamples {
 
 		// Print all values
 		Collection<Double> values = productPrice.values();
-		values.forEach(value -> System.out.println(value));
+		values.forEach(System.out::println);
 		
 		showAllProducts();
 		

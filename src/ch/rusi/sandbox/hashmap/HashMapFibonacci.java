@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class HashMapFibonacci {
     
-    private Map<Integer, BigInteger> memorizeHashMap = new HashMap<>();
+    private final Map<Integer, BigInteger> memorizeHashMap = new HashMap<>();
     {
         memorizeHashMap.put(0, BigInteger.ZERO);
         memorizeHashMap.put(1, BigInteger.ONE);
