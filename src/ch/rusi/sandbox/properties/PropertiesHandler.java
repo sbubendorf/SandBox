@@ -1,18 +1,14 @@
 package ch.rusi.sandbox.properties;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Properties;
-
 import ch.rusi.sandbox.string.StringUtil;
+
+import java.io.*;
+import java.util.Properties;
+import java.util.Set;
 
 public class PropertiesHandler {
 	
-	private String propFileName = null;
+	private final String propFileName;
 	private Properties prop = new Properties();
 	
 	public PropertiesHandler(String propertiesFileName) {
@@ -24,6 +20,7 @@ public class PropertiesHandler {
 		
 		PropertiesHandler ph = new PropertiesHandler("config/test.properties");
 		ph.testWrite();
+		System.out.println(ph.toString());
 		
 	}
 	
@@ -64,8 +61,6 @@ public class PropertiesHandler {
 			OutputStream out = new FileOutputStream(propFileName);
 			prop.store(out, "This file was written by test class " + this.getClass().getName());
 			System.out.println("Properties saved to file " + propFileName + " : " + System.lineSeparator() + this);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -77,8 +72,6 @@ public class PropertiesHandler {
 			InputStream input = new FileInputStream(propFileName);
 			this.prop = new Properties();
 			prop.load(input);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -89,15 +82,18 @@ public class PropertiesHandler {
 	public String toString() {
 		
 		String keyPaddingChar = ".";
-		
-		String out = "";
-		String[] keys = prop.keySet().toArray(new String[prop.keySet().size()]);
-		
+
+		StringBuilder out = new StringBuilder();
+
+		Set x = prop.keySet();
+		String[] keys = prop.keySet().toArray(new String[0]);
+
 		int keyLen = StringUtil.getLongestString(keys).length();
+
 		for (String key : keys) {
-			out += String.format("%1$-" + keyLen + "s", key).replace(" ", keyPaddingChar) + " : " + prop.getProperty(key) + System.lineSeparator();
+			out.append(String.format("%1$-" + keyLen + "s", key).replace(" ", keyPaddingChar)).append(" : ").append(prop.getProperty(key)).append(System.lineSeparator());
 		}
-		return out;
+		return out.toString();
 	}
 	
 }

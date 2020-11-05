@@ -10,9 +10,6 @@ import org.mvel2.integration.impl.MapVariableResolverFactory;
 
 public class EvalTest {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		
 	    Foo foo = new Foo();

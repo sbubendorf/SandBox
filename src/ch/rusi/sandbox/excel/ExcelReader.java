@@ -20,7 +20,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 public class ExcelReader {
 
 	private File file;
-	private FileInputStream fs;
 	private Iterator<Row> rowIterator;
 	private Workbook wb;
 	private Sheet sheet;
@@ -28,7 +27,7 @@ public class ExcelReader {
 	public ExcelReader(String fileName) {
 		try {
 			file = new File(fileName);
-			fs = new FileInputStream(file);
+			FileInputStream fs = new FileInputStream(file);
 			String type = getFileExtension(file);
 			switch (type) {
 			case "xls":
@@ -65,13 +64,11 @@ public class ExcelReader {
 
 	@SuppressWarnings("unused")
 	private void readCells() {
-		System.out.println("Showing conetent of Excel file '" + file.getName() + "':");
+		System.out.println("Showing content of Excel file '" + file.getName() + "':");
 		while ( rowIterator.hasNext() ) {
 			Row row = rowIterator.next();
 			System.out.println("Row #" + row.getRowNum());
-			Iterator<Cell> cellIterator = row.iterator();
-			while ( cellIterator.hasNext() ) {
-				Cell cell = cellIterator.next();
+			for (Cell cell : row) {
 				System.out.println("  - " + cell.getAddress().formatAsString() + " : " + getCellContent(cell));
 			}
 		}
@@ -129,7 +126,7 @@ public class ExcelReader {
 	}
 
 	private String getCellContent(Cell cell) {
-		String value = null;
+		String value;
 		if (CellType.BOOLEAN.equals(cell.getCellType())) {
 			value = Boolean.toString(cell.getBooleanCellValue());
 		} else if (CellType.NUMERIC.equals(cell.getCellType())) {

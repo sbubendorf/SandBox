@@ -23,16 +23,12 @@ public class CreatePDF {
 	 *	http://www.tutorialspoint.com/itext/index.htm
 	 * 
 	 */
-	
-	private static PdfWriter writer = null;
-	private static PdfDocument pdfDoc  = null;
-	private static Document document = null;
 
-	private static final String FILE_EXT = ".pdf"; 
+	private static final String FILE_EXT = ".pdf";
 
 	public static void main(String[] args) throws IOException {
-		
-		document = createDocument("01_empty_one_pager");
+
+		Document document = createDocument("01_empty_one_pager");
 		document.close();
 		
 		// --------------------------------------------------------------------------------
@@ -67,9 +63,9 @@ public class CreatePDF {
 		
 		document = createDocument("05_table");
 		float[] colWidths = {150F,150F,150F};
-		ArrayList<String> lastNames = new ArrayList<String>();
-		ArrayList<String> firstNames = new ArrayList<String>();
-		ArrayList<String> cities = new ArrayList<String>();
+		ArrayList<String> lastNames = new ArrayList<>();
+		ArrayList<String> firstNames = new ArrayList<>();
+		ArrayList<String> cities = new ArrayList<>();
 		for (int i = 0 ; i < 10 ; i++) {
 			lastNames.add(LoremIpsum.getInstance().getLastName());
 			firstNames.add(LoremIpsum.getInstance().getFirstName());
@@ -102,10 +98,10 @@ public class CreatePDF {
 		File file = new File("output/" + fileName);
 
 		// Creating the PDF Writer
-		writer = new PdfWriter(file.getAbsolutePath());
+		PdfWriter writer = new PdfWriter(file.getAbsolutePath());
 		
 		// Creating the PDF document
-		pdfDoc = new PdfDocument(writer);
+		PdfDocument pdfDoc = new PdfDocument(writer);
 		
 		// The new document has at least one empty page
 		pdfDoc.addNewPage();

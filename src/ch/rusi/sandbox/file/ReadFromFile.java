@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 public class ReadFromFile {
 
+	@SuppressWarnings("SpellCheckingInspection")
 	File file = new File("files/namegen/lastnames.txt");
 	Date timeStart = null;
 	Date timeEnd = null;
@@ -30,12 +31,12 @@ public class ReadFromFile {
 		System.out.println("Reading file with BufferedReader");
 		System.out.println("--------------------------------------------------------------------------------");
 
-		ArrayList<String> names = new ArrayList<String>();
+		ArrayList<String> names = new ArrayList<>();
 
 		timeStart = new Date();
 
 		FileReader fr;
-		BufferedReader br = null;
+		BufferedReader br;
 
 		fr = new FileReader(file);
 		br = new BufferedReader(fr);
@@ -92,10 +93,11 @@ public class ReadFromFile {
 		System.out.println("Read a specified number of chars directly into char array:");
 
 		fr = new FileReader(file);
-		char[] cbuf = new char[500];
-		fr.read(cbuf, 0, 100);
-		
-		System.out.println(cbuf);
+		char[] charBuffer = new char[500];
+		int numberOfCharsRead = fr.read(charBuffer, 0, 100);
+
+		System.out.println("Number of chars read from file " + file + " : " + numberOfCharsRead);
+		System.out.println(charBuffer);
 		
 		fr.close();
 

@@ -6,28 +6,28 @@ public class ArrayListExamples {
 
 	public static void main(String[] args) {
 
-	      ArrayList<String> arlist = new ArrayList<String>(); 
+	      ArrayList<String> arrayList = new ArrayList<>();
 
-	      arlist.add("JAVA");
-	      arlist.add("Csharp");
-	      arlist.add("Python");
-	      arlist.add("Php");
-	      arlist.add("Android");
-	      arlist.add("HTML");
+	      arrayList.add("JAVA");
+	      arrayList.add("Csharp");
+	      arrayList.add("Python");
+	      arrayList.add("Php");
+	      arrayList.add("Android");
+	      arrayList.add("HTML");
 
 	      //Adding "C++" at the sixth position
-	      arlist.add(5, "C++");
+	      arrayList.add(5, "C++");
 
 	      //displaying elements
-	      System.out.println(arlist);		
+	      System.out.println(arrayList);
 
 	      // Remove elements
-	      arlist.remove("Php");
-	      System.out.println(arlist);
+	      arrayList.remove("Php");
+	      System.out.println(arrayList);
 
 	      // Remove element at a certain position
-	      arlist.remove(2);
-	      System.out.println(arlist);
+	      arrayList.remove(2);
+	      System.out.println(arrayList);
 	      
 	      
 	      
