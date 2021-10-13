@@ -17,8 +17,9 @@ public class DateTimeTest {
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateFormat + " " + timeFormat);
 
     public static void main(String[] args) {
-		
+
         Date date = new Date();
+        System.out.println(date);
         System.out.println(sdf.format(date));
         
         Calendar cal = Calendar.getInstance();
